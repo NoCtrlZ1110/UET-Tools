@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './index.scss';
+import Header from './layout/Header';
+import Main from './app/main/Main';
 
 const App: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [url, setUrl] = useState<string>('');
 
   useEffect(() => {
     const queryInfo = { active: true, lastFocusedWindow: true };
-
     chrome.tabs &&
       chrome.tabs.query(queryInfo, (tabs) => {
         const url = tabs[0].url;
@@ -15,12 +17,9 @@ const App: React.FC = () => {
       });
   }, []);
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>URL:</p>
-        <p>{url}</p>
-      </header>
+    <div className='vnu-tools'>
+      <Header />
+      <Main />
     </div>
   );
 };
