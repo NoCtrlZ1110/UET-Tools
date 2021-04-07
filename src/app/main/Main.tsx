@@ -5,7 +5,7 @@ const Main: React.FC = () => {
   return (
     <div className='main'>
       {universities.map((u) => (
-        <div className='university d-flex'>
+        <div className='university d-flex' style={{ backgroundColor: u.color }}>
           <img
             src={`/logo/${u.acronym}.png`}
             alt={`logo-${u.acronym}`}
