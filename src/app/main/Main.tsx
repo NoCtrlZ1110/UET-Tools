@@ -6,12 +6,12 @@ const Main: React.FC = () => {
     <div className='main'>
       {universities.map((u) => (
         <div className='university d-flex' style={{ backgroundColor: u.color }}>
+          <div className='university-name ml-3'>{u.name}</div>
           <img
+            className='logo-watermark'
             src={`/logo/${u.acronym}.png`}
             alt={`logo-${u.acronym}`}
-            width={50}
           />
-          <div className='university-name'>{u.name}</div>
         </div>
       ))}
     </div>

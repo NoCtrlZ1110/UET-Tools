@@ -8,13 +8,29 @@ interface University {
 
 export const universities: Array<University> = [
   {
-    name: 'Trường Đại học Công nghệ',
+    name: 'Đại học Công nghệ',
     acronym: 'UET',
     color: Colors.Blue,
   },
   {
-    name: 'Trường Đại học Ngoại ngữ',
+    name: 'Đại học Ngoại ngữ',
     acronym: 'ULIS',
     color: Colors.Purple,
+  },
+
+  {
+    name: 'Đại học Khoa học Tự nhiên',
+    acronym: 'HUS',
+    color: Colors.Green,
+  },
+  {
+    name: 'Đại học Kinh tế',
+    acronym: 'UEB',
+    color: Colors.Red,
+  },
+  {
+    name: 'Đại học Khoa học Xã hội và Nhân văn',
+    acronym: 'USSH',
+    color: Colors.Yellow,
   },
 ];
