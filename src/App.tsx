@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import './index.scss';
 import Header from './layout/Header';
 import Main from './app/main/Main';
+import { Route, Switch } from 'react-router-dom';
+import { universities } from './const/Universities';
 
 const App: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [url, setUrl] = useState<string>('');
-
-  useEffect(() => {
-    const queryInfo = { active: true, lastFocusedWindow: true };
-    chrome.tabs &&
-      chrome.tabs.query(queryInfo, (tabs) => {
-        const url = tabs[0].url;
-        setUrl(url as string);
-      });
-  }, []);
   return (
     <div className='vnu-tools'>
       <Header />
-      <Main />
+      <Switch>
+        {universities.map((u) => (
+          <Route path={`/${u.acronym}`}>
+            <div>{u.name}</div>
+          </Route>
+        ))}
+        <Route path='/'>
+          <Main />
+        </Route>
+      </Switch>
     </div>
   );
 };
