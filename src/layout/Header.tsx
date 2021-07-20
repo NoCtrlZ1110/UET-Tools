@@ -1,9 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { ChromeMessage, Sender } from '../types';
 
 const Header: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [url, setUrl] = useState<string>('');
+  const [snowing, setSnowing] = useState(false);
+  const click = () => {
+    const message: ChromeMessage = {
+      from: Sender.React,
+      data: { snowing: !snowing },
+      type: 'TOGGLE_SNOW',
+    };
+
+    chrome.runtime.sendMessage(message, (response) => {});
+    console.log('sent TOGGLE_SNOW from react', message);
+
+    // getCurrentTabUId((id) => {
+    //   id && chrome.tabs.sendMessage(id, message, (response) => {});
+
+    //   console.log('getCurrentTabUId', id);
+    //   id && console.log('sent TOGGLE_SNOW from react');
+    // });
+  };
+
+  useEffect(() => {
+    chrome.runtime.sendMessage({ type: 'REQ_SNOW_STATUS' });
+    chrome.runtime.onMessage.addListener((message: ChromeMessage) => {
+      switch (message.type) {
+        case 'SNOW_STATUS':
+          console.log('react received SNOW_STATUS', message);
+          setSnowing(message.data.snowing);
+          break;
+        default:
+          break;
+      }
+    });
+  }, []);
 
   useEffect(() => {
     const queryInfo = { active: true, lastFocusedWindow: true };
@@ -16,7 +50,13 @@ const Header: React.FC = () => {
 
   return (
     <div className='header'>
-      <Link to='/'>VNU TOOLS</Link>
+      <div className='d-flex align-items-center'>
+        <Link to='/'>VNU TOOLS</Link>
+        <Button className='ml-auto' size='sm' variant='outline' onClick={click}>
+          {snowing ? '🥶' : '❆'}
+        </Button>
+      </div>
+      <div></div>
     </div>
   );
 };

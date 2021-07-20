@@ -21,17 +21,22 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "./static/js/content.js"
+      ],
+      "css": [
+        "./snow.css"
       ],
       "all_frames": false,
       "run_at": "document_end"
     }
   ],
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "optional_permissions": [
     "<all_urls>"
