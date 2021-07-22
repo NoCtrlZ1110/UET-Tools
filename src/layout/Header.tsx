@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { ChromeMessage, Sender } from '../types';
+import { ChromeMessage, Sender, MessageType } from '../types';
 
 const Header: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -11,11 +11,11 @@ const Header: React.FC = () => {
     const message: ChromeMessage = {
       from: Sender.React,
       data: { snowing: !snowing },
-      type: 'TOGGLE_SNOW',
+      type: MessageType.TOGGLE_SNOW,
     };
 
     chrome.runtime.sendMessage(message, (response) => {});
-    console.log('sent TOGGLE_SNOW from react', message);
+    // console.log('sent TOGGLE_SNOW from react', message);
 
     // getCurrentTabUId((id) => {
     //   id && chrome.tabs.sendMessage(id, message, (response) => {});
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
     chrome.runtime.onMessage.addListener((message: ChromeMessage) => {
       switch (message.type) {
         case 'SNOW_STATUS':
-          console.log('react received SNOW_STATUS', message);
+          // console.log('react received SNOW_STATUS', message);
           setSnowing(message.data.snowing);
           break;
         default:

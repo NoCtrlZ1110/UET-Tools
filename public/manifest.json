@@ -35,8 +35,12 @@
     }
   ],
   "permissions": [
+    "https://uet.vnu.edu.vn/*",
     "activeTab",
-    "storage"
+    "storage",
+    "notifications",
+    "storage",
+    "tabs"
   ],
   "optional_permissions": [
     "<all_urls>"

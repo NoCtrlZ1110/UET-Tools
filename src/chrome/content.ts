@@ -49,18 +49,16 @@ const messagesFromReactAppListener = (
   response: MessageResponse
 ) => {
   const isValidated = validateSender(message, sender);
-  console.log('isValidated', isValidated);
-  console.log('data', message);
 
   if (isValidated) {
     switch (message.type) {
       case 'SNOW_STATUS':
-        console.log('content received SNOW_STATUS', message);
+        // console.log('content received SNOW_STATUS', message);
         snow(message.data.snowing);
         break;
 
       default:
-        console.log('default', message);
+        // console.log('default', message);
         break;
     }
   } else {
