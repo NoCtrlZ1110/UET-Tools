@@ -1,3 +1,4 @@
+import UET from '../core/uet';
 import { ChromeMessage, MessageType } from './../types';
 import Snow from './snow';
 // import { loadHTML } from './utils';
@@ -41,30 +42,21 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
 // --- News Core --- //
 
-chrome.runtime.onMessage.addListener((message: ChromeMessage) => {
-  switch (message.type) {
-    case MessageType.REQ_SNOW_STATUS:
-      console.log('background received REQ_SNOW_STATUS', message);
-      Snow.sendSnowStatus();
-      break;
-    case MessageType.TOGGLE_SNOW:
-      console.log('background received TOGGLE_SNOW', message);
-      let snowing = message.data.snowing;
-      Snow.setSnowing(snowing);
-      chrome.storage.local.set({ snowing: snowing });
-      Snow.sendSnowStatus();
-      break;
-    case MessageType.UET_NEWS:
-      break;
-    default:
-      console.log('background default', message);
-      break;
+chrome.runtime.onMessage.addListener(
+  (message: ChromeMessage, sender, sendResponse: (res?: any) => void) => {
+    switch (message.type) {
+      case MessageType.REQ_SNOW_STATUS:
+        Snow.sendSnowStatus();
+        break;
+      case MessageType.TOGGLE_SNOW:
+        Snow.toggleSnow(message);
+        break;
+      case MessageType.REQ_UET_NEWS:
+        UET.fetchUETNews();
+        break;
+      default:
+        console.log('background default', message);
+        break;
+    }
   }
-});
-
-// loadHTML('https://uet.vnu.edu.vn/category/tin-tuc/tin-sinh-vien/').then(
-//   (res) => {
-//     console.log(res);
-//     alert('loaded');
-//   }
-// );
+);

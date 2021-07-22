@@ -13,6 +13,7 @@ export interface ChromeMessage {
 export enum MessageType {
   REQ_SNOW_STATUS = 'REQ_SNOW_STATUS',
   TOGGLE_SNOW = 'TOGGLE_SNOW',
-  UET_NEWS = 'UET_NEWS',
   SNOW_STATUS = 'SNOW_STATUS',
+  REQ_UET_NEWS = 'REQ_UET_NEWS',
+  RES_UET_NEWS = 'RES_UET_NEWS',
 }

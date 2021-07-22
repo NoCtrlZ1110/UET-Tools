@@ -24,12 +24,11 @@ const Header: React.FC = () => {
     //   id && console.log('sent TOGGLE_SNOW from react');
     // });
   };
-
   useEffect(() => {
     chrome.runtime.sendMessage({ type: 'REQ_SNOW_STATUS' });
     chrome.runtime.onMessage.addListener((message: ChromeMessage) => {
       switch (message.type) {
-        case 'SNOW_STATUS':
+        case MessageType.SNOW_STATUS:
           // console.log('react received SNOW_STATUS', message);
           setSnowing(message.data.snowing);
           break;

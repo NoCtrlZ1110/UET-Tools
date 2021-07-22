@@ -23,5 +23,6 @@ export const getCurrentTabUId = (
 export const loadHTML = async (url: string) => {
   const response = await fetch(url);
   const text = await response.text();
-  return new DOMParser().parseFromString(text, 'text/html');
+  return text;
+  // return new DOMParser().parseFromString(text, 'text/html');
 };
