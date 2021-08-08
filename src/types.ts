@@ -17,3 +17,12 @@ export enum MessageType {
   REQ_UET_NEWS = 'REQ_UET_NEWS',
   RES_UET_NEWS = 'RES_UET_NEWS',
 }
+
+export interface NewsType {
+  url: string;
+  title: string;
+  thumbnail: string;
+  excerpt: string;
+  date: string;
+  month: string;
+}

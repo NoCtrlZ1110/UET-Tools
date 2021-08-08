@@ -8,17 +8,14 @@ export {};
  *  and when Chrome is updated to a new version. */
 chrome.runtime.onInstalled.addListener((details) => {
   console.log('[background.js] onInstalled', details);
-  // alert('[background.js] onInstalled');
 });
 
 chrome.runtime.onConnect.addListener((port) => {
   console.log('[background.js] onConnect', port);
-  // alert('[background.js] onInstalled');
 });
 
 chrome.runtime.onStartup.addListener(() => {
   console.log('[background.js] onStartup');
-  // alert('[background.js] onInstalled');
 });
 
 /**
@@ -32,7 +29,6 @@ chrome.runtime.onStartup.addListener(() => {
  *  be sent and the page won't be unloaded. */
 chrome.runtime.onSuspend.addListener(() => {
   console.log('[background.js] onSuspend');
-  // alert('[background.js] onSuspend');
 });
 
 chrome.browserAction.onClicked.addListener(function (tab) {

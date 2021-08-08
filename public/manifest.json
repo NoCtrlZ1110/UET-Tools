@@ -1,6 +1,6 @@
 {
-  "name": "VNU Tools",
-  "description": "For VNUers - From UET with love ♥️",
+  "name": "UET Tools",
+  "description": "For UETers - From SGUET with love ♥️",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {

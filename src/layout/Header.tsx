@@ -14,7 +14,7 @@ const Header: React.FC = () => {
       type: MessageType.TOGGLE_SNOW,
     };
 
-    chrome.runtime.sendMessage(message, (response) => {});
+    chrome.runtime?.sendMessage(message, (response) => {});
     // console.log('sent TOGGLE_SNOW from react', message);
 
     // getCurrentTabUId((id) => {
@@ -25,8 +25,8 @@ const Header: React.FC = () => {
     // });
   };
   useEffect(() => {
-    chrome.runtime.sendMessage({ type: 'REQ_SNOW_STATUS' });
-    chrome.runtime.onMessage.addListener((message: ChromeMessage) => {
+    chrome.runtime?.sendMessage({ type: 'REQ_SNOW_STATUS' });
+    chrome.runtime?.onMessage.addListener((message: ChromeMessage) => {
       switch (message.type) {
         case MessageType.SNOW_STATUS:
           // console.log('react received SNOW_STATUS', message);
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
   return (
     <div className='header'>
       <div className='d-flex align-items-center'>
-        <Link to='/'>VNU TOOLS</Link>
+        <Link to='/'>UET TOOLS</Link>
         <Button className='ml-auto' size='sm' variant='outline' onClick={click}>
           {snowing ? '🥶' : '❆'}
         </Button>
