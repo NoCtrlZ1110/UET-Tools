@@ -18,11 +18,12 @@ export enum MessageType {
   RES_UET_NEWS = 'RES_UET_NEWS',
 }
 
-export interface NewsType {
+export interface NewsModel {
   url: string;
   title: string;
   thumbnail: string;
   excerpt: string;
   date: string;
   month: string;
+  tag: string;
 }

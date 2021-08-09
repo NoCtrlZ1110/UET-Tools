@@ -6,13 +6,14 @@ const UniversitiesList: React.FC = () => {
   const { push } = useHistory();
   return (
     <div className='main'>
-      {universities.map((u) => (
+      {universities.map((u, i) => (
         <div
           className='university d-flex'
           style={{ backgroundColor: u.color }}
           onClick={() => {
             push(`/${u.acronym}`);
           }}
+          key={i}
         >
           <div className='university-name ml-3'>{u.name}</div>
           <img

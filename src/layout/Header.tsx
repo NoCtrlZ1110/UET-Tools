@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { ChromeMessage, Sender, MessageType } from '../types';
 
 const Header: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [url, setUrl] = useState<string>('');
+  // const [url, setUrl] = useState<string>('');
   const [snowing, setSnowing] = useState(false);
   const click = () => {
     const message: ChromeMessage = {
@@ -15,14 +14,6 @@ const Header: React.FC = () => {
     };
 
     chrome.runtime?.sendMessage(message, (response) => {});
-    // console.log('sent TOGGLE_SNOW from react', message);
-
-    // getCurrentTabUId((id) => {
-    //   id && chrome.tabs.sendMessage(id, message, (response) => {});
-
-    //   console.log('getCurrentTabUId', id);
-    //   id && console.log('sent TOGGLE_SNOW from react');
-    // });
   };
   useEffect(() => {
     chrome.runtime?.sendMessage({ type: 'REQ_SNOW_STATUS' });
@@ -38,19 +29,21 @@ const Header: React.FC = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const queryInfo = { active: true, lastFocusedWindow: true };
-    chrome.tabs &&
-      chrome.tabs.query(queryInfo, (tabs) => {
-        const url = tabs[0].url;
-        setUrl(url as string);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const queryInfo = { active: true, lastFocusedWindow: true };
+  //   chrome.tabs &&
+  //     chrome.tabs.query(queryInfo, (tabs) => {
+  //       const url = tabs[0].url;
+  //       setUrl(url as string);
+  //     });
+  // }, []);
 
   return (
     <div className='header'>
       <div className='d-flex align-items-center'>
-        <Link to='/'>UET TOOLS</Link>
+        <Link className='tool-name' to='/'>
+          UET TOOLS
+        </Link>
         <Button className='ml-auto' size='sm' variant='outline' onClick={click}>
           {snowing ? '🥶' : '❆'}
         </Button>

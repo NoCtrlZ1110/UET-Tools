@@ -7,11 +7,12 @@ import UniversitiesList from './app/main/UniversitiesList';
 
 const Routes: React.FC = () => {
   return (
+    <div className='tool-container'>
     <Switch>
       <Route path='/UET' component={UET} />
       <Route path='/universities' component={UniversitiesList} />
-      {universities.map((u) => (
-        <Route path={`/${u.acronym}`}>
+      {universities.map((u, i) => (
+        <Route path={`/${u.acronym}`} key={i}>
           <div>{u.name}</div>
         </Route>
       ))}
@@ -19,6 +20,7 @@ const Routes: React.FC = () => {
         <Main />
       </Route>
     </Switch>
+    </div>
   );
 };
 

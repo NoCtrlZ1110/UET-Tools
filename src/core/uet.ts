@@ -1,8 +1,8 @@
 import { sendMessage, newMessage } from './../chrome/utils';
 import { loadHTML } from '../chrome/utils';
-import { MessageType, NewsType, Sender } from '../types';
+import { MessageType, NewsModel, Sender } from '../types';
 
-let UET_NEWS: NewsType[];
+let UET_NEWS: NewsModel[];
 
 chrome.storage.local.get('UET_NEWS', (res) => {
   if (res['UET_NEWS']) {
@@ -33,7 +33,7 @@ const fetchUETNews = () => {
 };
 
 export const filterNews = (html: string) => {
-  const news: NewsType[] = [];
+  const news: NewsModel[] = [];
   const document = new DOMParser().parseFromString(html, 'text/html');
   Array.from(document.getElementsByClassName('blog-post-item')).forEach(
     (item: any) => {
@@ -50,13 +50,14 @@ export const filterNews = (html: string) => {
         excerpt: item.querySelector(
           'div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > p:nth-child(1)'
         ).textContent,
-        month: item
-          .querySelector(
-            'div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(2) div:nth-child(1) div:nth-child(1)'
-          )
-          .textContent.replace('Th', ''),
+        month: item.querySelector(
+          'div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(2) div:nth-child(1) div:nth-child(1)'
+        ).textContent,
         date: item.querySelector(
           'div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(1) div:nth-child(2) div:nth-child(1) div:nth-child(2)'
+        ).textContent,
+        tag: item.querySelector(
+          'div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > span:nth-child(2) > a:nth-child(1)'
         ).textContent,
       });
     }

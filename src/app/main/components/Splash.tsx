@@ -6,7 +6,7 @@ const Splash: React.FC<{ color?: string }> = ({ color }) => {
       <div className='spinner-border m-5'>
         <span className='sr-only'>Đang tải dữ liệu ...</span>
       </div>
-      <h3>Đang tải dữ liệu ...</h3>
+      <h4>Đang tải dữ liệu ...</h4>
     </div>
   );
 };

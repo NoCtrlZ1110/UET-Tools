@@ -1,0 +1,65 @@
+.news-tile {
+  background-color: $blue;
+  margin: 20px 30px 40px 20px;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 0 #a1d8ff, 10px 10px 0 0 #cae6ff, 15px 15px 0 0 #e1eeff,
+    5px 5px 15px 5px transparent;
+  position: relative;
+  overflow: hidden;
+
+  hr {
+    border-color: white;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    opacity: 0.4;
+    border-width: 2px;
+    border-radius: 5px;
+  }
+
+  .badge {
+    color: $blue;
+  }
+
+  .title {
+    font-size: 1.1em;
+  }
+
+  .excerpt {
+    font-size: 0.85em;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    opacity: 0;
+    transform: translate(0, 40%);
+    transition: all 0.15s ease-in;
+    color: $blue;
+    z-index: 999;
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: white;
+    opacity: 0;
+    transition: all 0.15s ease-in;
+    z-index: 999;
+    // border-radius: 6px;
+  }
+
+  &:hover {
+    .overlay {
+      opacity: 1;
+    }
+    .excerpt {
+      opacity: 1;
+      transform: translate(0px, 0px);
+    }
+  }
+}
