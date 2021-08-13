@@ -16,14 +16,6 @@ export enum MessageType {
   SNOW_STATUS = 'SNOW_STATUS',
   REQ_UET_NEWS = 'REQ_UET_NEWS',
   RES_UET_NEWS = 'RES_UET_NEWS',
-}
-
-export interface NewsModel {
-  url: string;
-  title: string;
-  thumbnail: string;
-  excerpt: string;
-  date: string;
-  month: string;
-  tag: string;
+  REQ_UET_NEWS_DETAILS = 'REQ_UET_NEWS_DETAILS',
+  RES_UET_NEWS_DETAILS = 'RES_UET_NEWS_DETAILS',
 }

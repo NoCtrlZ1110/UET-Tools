@@ -1,6 +1,7 @@
 import { sendMessage, newMessage } from './../chrome/utils';
 import { loadHTML } from '../chrome/utils';
-import { MessageType, NewsModel, Sender } from '../types';
+import { MessageType, Sender } from '../types';
+import { NewsDetailModel, NewsModel, NewsRefer } from '../models/NewsModel';
 
 let UET_NEWS: NewsModel[];
 
@@ -10,11 +11,13 @@ chrome.storage.local.get('UET_NEWS', (res) => {
     console.log(UET_NEWS);
   } else {
     console.log('no UET_NEWS on local -> fetching new data');
-    fetchUETNews();
+    fetchUETNewsList();
   }
 });
 
-const fetchUETNews = () => {
+// --- News List ---
+
+const fetchUETNewsList = () => {
   if (UET_NEWS && UET_NEWS.length > 0) {
     sendMessage(
       newMessage(Sender.Background, UET_NEWS, MessageType.RES_UET_NEWS)
@@ -26,7 +29,7 @@ const fetchUETNews = () => {
       sendMessage(
         newMessage(Sender.Background, UET_NEWS, MessageType.RES_UET_NEWS)
       );
-      console.log(UET_NEWS);
+      // console.log(UET_NEWS);
       chrome.storage.local.set({ UET_NEWS });
     }
   );
@@ -65,8 +68,47 @@ export const filterNews = (html: string) => {
   return news;
 };
 
+// --- News Details ---
+
+const filterNewsDetails = (html: string) => {
+  const document = new DOMParser().parseFromString(html, 'text/html');
+  const refers: NewsRefer[] = [];
+
+  const title = document.getElementsByClassName('single-content-title')[0]
+    ?.textContent;
+  const content = document
+    .getElementsByClassName('single-post-content-text')[0]
+    ?.textContent?.trim();
+
+  const itemMeta = document.getElementsByClassName('item-meta')[0];
+
+  const metadata = {
+    author: itemMeta.children[0].textContent?.replace('|', '').trim(),
+    date: itemMeta.children[1].textContent?.replace('|', '').trim(),
+    tag: itemMeta.children[2].textContent?.replace('|', '').trim().split(' . '),
+    views: itemMeta.children[5].textContent,
+  };
+
+  document
+    .getElementsByClassName('single-post-content-text')[0]
+    .querySelectorAll('a')
+    .forEach((a) => refers.push({ title: a.textContent, url: a.href }));
+
+  return { title, content, metadata, refers } as NewsDetailModel;
+};
+
+const fetchUETNewsDetails = (data: any) => {
+  loadHTML(data.url).then((res) => {
+    let details = filterNewsDetails(res);
+    sendMessage(
+      newMessage(Sender.Background, details, MessageType.RES_UET_NEWS_DETAILS)
+    );
+  });
+};
+
 const UET = {
-  fetchUETNews,
+  fetchUETNews: fetchUETNewsList,
+  fetchUETNewsDetails: fetchUETNewsDetails,
 };
 
 export default UET;

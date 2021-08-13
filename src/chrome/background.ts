@@ -50,6 +50,9 @@ chrome.runtime.onMessage.addListener(
       case MessageType.REQ_UET_NEWS:
         UET.fetchUETNews();
         break;
+      case MessageType.REQ_UET_NEWS_DETAILS:
+        UET.fetchUETNewsDetails(message.data);
+        break;
       default:
         console.log('background default', message);
         break;

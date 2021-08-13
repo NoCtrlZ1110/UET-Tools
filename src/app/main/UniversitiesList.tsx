@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { universities } from '../../const/Universities';
+import { universities } from '../../const/universities';
 
 const UniversitiesList: React.FC = () => {
   const { push } = useHistory();

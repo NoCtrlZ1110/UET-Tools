@@ -39,7 +39,7 @@ const sendSnowStatus = () => {
 };
 
 const toggleSnow = (message: any) => {
-  console.log('background received TOGGLE_SNOW', message);
+  // console.log('background received TOGGLE_SNOW', message);
   snowing = message.data.snowing;
   chrome.storage.local.set({ snowing: snowing });
   sendSnowStatus();

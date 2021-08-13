@@ -1,10 +1,16 @@
 import React from 'react';
 import { Badge } from 'react-bootstrap';
-import { NewsModel } from '../../../types';
+import { useHistory } from 'react-router';
+import { NewsModel } from '../../../models/NewsModel';
 
 const NewsTile: React.FC<{ news: NewsModel }> = ({ news }) => {
+  const { push } = useHistory();
+
   return (
-    <div className='news-tile'>
+    <div
+      className='news-tile'
+      onClick={() => push(`/UET/details?url=${news.url}`)}
+    >
       <div className='overlay' />
       <div className='excerpt'>{news.excerpt.trim()}</div>
 
